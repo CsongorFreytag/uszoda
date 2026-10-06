@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 URL = "https://www.debrecenisportuszoda.hu/palyabeosztas"
 OUT = sys.argv[1] if len(sys.argv) > 1 else "uszoda.ics"
 POOLS = {"50m-es medence"}  # csak ez; None = mind
+LOW_LANES = 3  # ennél kevesebb szabad sávnál piros jelölés
 MIN_LANES = 1  # ennél kevesebb szabad sávú idősáv nem kerül be
 TZ = "Europe/Budapest"
 
@@ -98,14 +99,16 @@ def main():
                 day = d.replace("-", "")
                 uid = hashlib.md5(f"{d}{pool}{a}{b}{free}".encode()).hexdigest() + "@uszoda"
                 n = f"{len(free)}/{len(lane_map)}"
+                low = len(free) < LOW_LANES
+                mark = "🔴 " if low else ""
                 lines += [
                     "BEGIN:VEVENT", f"UID:{uid}", f"DTSTAMP:{now}",
                     f"DTSTART;TZID={TZ}:{day}T{a.replace(':', '')}00",
                     f"DTEND;TZID={TZ}:{day}T{b.replace(':', '')}00",
-                    f"SUMMARY:{esc(f'Szabad sávok ({n}) – {pool}')}",
+                    f"SUMMARY:{esc(f'{mark}Szabad sávok ({n}) – {pool}')}",
                     f"DESCRIPTION:{esc('Szabad sávok: ' + ', '.join(free))}",
                     f"LOCATION:{esc('Debreceni Sportuszoda')}",
-                    f"URL:{URL}", "TRANSP:TRANSPARENT", "END:VEVENT"]
+                    f"URL:{URL}", "TRANSP:TRANSPARENT"] + (["COLOR:red"] if low else []) + ["END:VEVENT"]
                 count += 1
     lines.append("END:VCALENDAR")
     with open(OUT, "w", encoding="utf-8", newline="") as f:
