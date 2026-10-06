@@ -97,12 +97,12 @@ def main():
             for a, b, free in segments(lane_map):
                 day = d.replace("-", "")
                 uid = hashlib.md5(f"{d}{pool}{a}{b}{free}".encode()).hexdigest() + "@uszoda"
-                n = f"{len(free)}/{len(lane_map)} sáv"
+                n = f"{len(free)}/{len(lane_map)}"
                 lines += [
                     "BEGIN:VEVENT", f"UID:{uid}", f"DTSTAMP:{now}",
                     f"DTSTART;TZID={TZ}:{day}T{a.replace(':', '')}00",
                     f"DTEND;TZID={TZ}:{day}T{b.replace(':', '')}00",
-                    f"SUMMARY:{esc(f'{pool} – szabad ({n})')}",
+                    f"SUMMARY:{esc(f'Szabad sávok ({n}) – {pool}')}",
                     f"DESCRIPTION:{esc('Szabad sávok: ' + ', '.join(free))}",
                     f"LOCATION:{esc('Debreceni Sportuszoda')}",
                     f"URL:{URL}", "TRANSP:TRANSPARENT", "END:VEVENT"]
