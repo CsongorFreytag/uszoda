@@ -2,7 +2,7 @@
 """FLOW Yoga Debrecen órarend -> flowyoga.ics (Google Naptárhoz).
 
 Az oldal (flowyoga.hu/debreceni-yoga-studio) órarendje egy Motibro widget,
-ezt olvassuk be közvetlenül. Esemény címe: Foglalkozás; leírás: Oktató, Terem.
+ezt olvassuk be közvetlenül. Esemény címe: Foglalkozás - Oktató; leírás: Intenzitás, Terem.
 Csak a Python standard könyvtárát használja.
 
 Használat:  python flowyoga_ics.py [kimeneti.ics]
@@ -77,13 +77,15 @@ def main():
              "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
              "X-WR-CALNAME:FLOW Yoga Debrecen", f"X-WR-TIMEZONE:{TZ}"]
     for day, a, b, name, trainer, room, link in events:
+        base, _, intensity = name.partition(" - ")
+        desc = ([f"Intenzitás: {intensity}"] if intensity else []) + [f"Terem: {room}"]
         uid = hashlib.md5(f"{day}{a}{b}{name}{trainer}{room}".encode()).hexdigest() + "@flowyoga"
         lines += [
             "BEGIN:VEVENT", f"UID:{uid}", f"DTSTAMP:{now}",
             f"DTSTART;TZID={TZ}:{day}T{a.replace(':', '')}00",
             f"DTEND;TZID={TZ}:{day}T{b.replace(':', '')}00",
-            f"SUMMARY:{esc(name)}",
-            f"DESCRIPTION:{esc(f'Oktató: {trainer}' + chr(10) + f'Terem: {room}')}",
+            f"SUMMARY:{esc(f'{base} - {trainer}')}",
+            f"DESCRIPTION:{esc(chr(10).join(desc))}",
             f"LOCATION:{esc('FLOW Yoga Debrecen')}",
             f"URL:{link}", "END:VEVENT"]
     lines.append("END:VCALENDAR")
