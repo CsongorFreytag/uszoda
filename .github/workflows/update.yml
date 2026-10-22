@@ -17,15 +17,16 @@ jobs:
         with:
           python-version: "3.12"
       - run: python uszoda_ics.py uszoda.ics
+      - run: python flowyoga_ics.py flowyoga.ics
       - name: Commit if changed
         run: |
           # a DTSTAMP minden futásnál változik, ezért csak az események változását nézzük
-          if git diff --quiet -I'^DTSTAMP' -- uszoda.ics; then
+          if git diff --quiet -I'^DTSTAMP' -- uszoda.ics flowyoga.ics; then
             echo "nincs változás"
           else
             git config user.name "github-actions"
             git config user.email "actions@github.com"
-            git add uszoda.ics
-            git commit -m "Update uszoda.ics"
+            git add uszoda.ics flowyoga.ics
+            git commit -m "Update ics files"
             git push
           fi
