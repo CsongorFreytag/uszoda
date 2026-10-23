@@ -6,19 +6,8 @@ METHOD:PUBLISH
 X-WR-CALNAME:FLOW Yoga Debrecen
 X-WR-TIMEZONE:Europe/Budapest
 BEGIN:VEVENT
-UID:72476ea26182db0eaac141aaa413b8ec@flowyoga
-DTSTAMP:20261022T173234Z
-DTSTART;TZID=Europe/Budapest:20261023T100000
-DTEND;TZID=Europe/Budapest:20261023T110000
-SUMMARY:Csípőnyitó jóga - Kitti
-DESCRIPTION:Terem: FLOW
-LOCATION:FLOW Yoga Debrecen
-URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
- nt=2S0UrEGc&source=widget
-END:VEVENT
-BEGIN:VEVENT
 UID:9e784e902a706631fe533a40d881df69@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261025T170000
 DTEND;TZID=Europe/Budapest:20261025T181500
 SUMMARY:Stresszoldó jóga - Kitti
@@ -29,7 +18,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:4da756c6391f3157fdd2fb3d6d359f87@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261026T190000
 DTEND;TZID=Europe/Budapest:20261026T201500
 SUMMARY:Gerincjóga - Kitti
@@ -40,7 +29,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:8098b4b8538b1e9f002340a792540a94@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261027T090000
 DTEND;TZID=Europe/Budapest:20261027T100000
 SUMMARY:Csípőnyitó jóga - Kitti
@@ -51,7 +40,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:357a7b009abae4091d1433ed45f7923d@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261027T191500
 DTEND;TZID=Europe/Budapest:20261027T203000
 SUMMARY:Aerial jóga - Flóra
@@ -62,7 +51,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:a462348051d09265e6376b6b5602d682@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261028T090000
 DTEND;TZID=Europe/Budapest:20261028T100000
 SUMMARY:Gerincjóga - Zsuzsi
@@ -73,7 +62,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:00c096420df04f8dca28973a57cd5436@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261028T190000
 DTEND;TZID=Europe/Budapest:20261028T201500
 SUMMARY:Gerincjóga - Kitti
@@ -84,7 +73,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:ca22b99edc2892d769dc4792a30ac4ad@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261029T103000
 DTEND;TZID=Europe/Budapest:20261029T113000
 SUMMARY:Hatha FLOW - Lilla
@@ -95,7 +84,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:56e4d12293a842c7e84e3c24324b88ce@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261029T191500
 DTEND;TZID=Europe/Budapest:20261029T203000
 SUMMARY:Csípőnyitó Aerial jóga - Kitti
@@ -106,7 +95,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:c0258350b6ce2e19a7d5c563ee4118e5@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261101T170000
 DTEND;TZID=Europe/Budapest:20261101T181500
 SUMMARY:Gyertyafényes jóga - Lilla
@@ -117,7 +106,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:2a1ea9c06bddcd58832db33ccec76208@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261102T190000
 DTEND;TZID=Europe/Budapest:20261102T201500
 SUMMARY:Gerincjóga - Lilla
@@ -128,7 +117,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:ca8d91f9c091cda97131c9218fc0f287@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261103T090000
 DTEND;TZID=Europe/Budapest:20261103T100000
 SUMMARY:Csípőnyitó jóga - Lilla
@@ -139,7 +128,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:b9e507d8f1ca59d7548db80c9912145b@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261103T191500
 DTEND;TZID=Europe/Budapest:20261103T203000
 SUMMARY:Aerial jóga - Kitti
@@ -150,7 +139,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:fc3f6c6840d92238772c6c1f0d1bb8d7@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261104T090000
 DTEND;TZID=Europe/Budapest:20261104T100000
 SUMMARY:Gerincjóga - Lilla
@@ -161,7 +150,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:5122cd12db88e60b8420c05e7b8b81cd@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261104T190000
 DTEND;TZID=Europe/Budapest:20261104T201500
 SUMMARY:Gerincjóga - Lilla
@@ -172,7 +161,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:3b58d45bb1ea436f304cfae9ceec5e1c@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261105T103000
 DTEND;TZID=Europe/Budapest:20261105T113000
 SUMMARY:Hatha FLOW - Kitti
@@ -183,7 +172,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:2117a2e076e58b6e618ad06f42269d6c@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261105T191500
 DTEND;TZID=Europe/Budapest:20261105T203000
 SUMMARY:Hatha jóga - Melitta
@@ -194,7 +183,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:021faec02834253122e597fe94de698c@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261106T191500
 DTEND;TZID=Europe/Budapest:20261106T203000
 SUMMARY:Jóga és hangtálas meditáció - Kitti
@@ -205,7 +194,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:538a35b18ff4d9b02513573274fdf032@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261108T151500
 DTEND;TZID=Europe/Budapest:20261108T163000
 SUMMARY:Aerial jóga - Kitti
@@ -216,7 +205,7 @@ URL:https://www.motibro.com/login?club=flow-yoga-debrecen&page=booking&eve
 END:VEVENT
 BEGIN:VEVENT
 UID:63a9b117081dad68f4cf456e2f06abe6@flowyoga
-DTSTAMP:20261022T173234Z
+DTSTAMP:20261023T094215Z
 DTSTART;TZID=Europe/Budapest:20261108T170000
 DTEND;TZID=Europe/Budapest:20261108T181500
 SUMMARY:Stresszoldó jóga - Ildi
