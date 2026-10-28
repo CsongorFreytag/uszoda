@@ -18,6 +18,7 @@ URL = "https://www.motibro.com/visitors/reservation_widget?operator=flow-yoga-de
 PAGE = "https://flowyoga.hu/debreceni-yoga-studio/"
 OUT = sys.argv[1] if len(sys.argv) > 1 else "flowyoga.ics"
 TZ = "Europe/Budapest"
+EARLIEST = "12:00"  # ennél korábban kezdődő órák kimaradnak
 MONTHS = {m: i for i, m in enumerate(
     ["január", "február", "március", "április", "május", "június", "július",
      "augusztus", "szeptember", "október", "november", "december"], 1)}
@@ -69,7 +70,7 @@ def fold(line):
 
 
 def main():
-    events = parse(fetch())
+    events = [e for e in parse(fetch()) if e[1] >= EARLIEST]
     if not events:
         sys.exit("Nem található óra, a kimenet nem íródott felül.")
     now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
