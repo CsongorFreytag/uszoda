@@ -15,8 +15,11 @@ import urllib.request
 from datetime import datetime, timezone
 
 URL = "https://www.debrecenisportuszoda.hu/palyabeosztas"
-OUT = sys.argv[1] if len(sys.argv) > 1 else "uszoda.ics"
-POOLS = {"50m-es medence"}  # csak ez; None = mind
+# kimeneti fájl -> (medence, naptár neve)
+OUTPUTS = {
+    "uszoda.ics": ("50m-es medence", "Debreceni Sportuszoda - szabad sávok"),
+    "uszoda_25m.ics": ("25m-es medence", "Debreceni Sportuszoda - 25m - szabad sávok"),
+}
 LOW_LANES = 3  # ennél kevesebb szabad sávnál piros jelölés
 MIN_LANES = 1  # ennél kevesebb szabad sávú idősáv nem kerül be
 TZ = "Europe/Budapest"
@@ -82,38 +85,50 @@ def fold(line):
     return "\r\n".join(out)
 
 
+def build(days, pool_name, calname, now):
+    """-> (ics szöveg, események száma) egy medencére."""
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//uszoda-palyabeosztas//HU",
+             "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+             f"X-WR-CALNAME:{calname}", f"X-WR-TIMEZONE:{TZ}"]
+    count = 0
+    for d, pools in days:
+        lane_map = pools.get(pool_name)
+        if lane_map is None:
+            continue
+        pool = pool_name
+        for a, b, free in segments(lane_map):
+            day = d.replace("-", "")
+            uid = hashlib.md5(f"{d}{pool}{a}{b}{free}".encode()).hexdigest() + "@uszoda"
+            n = f"{len(free)}/{len(lane_map)}"
+            low = len(free) < LOW_LANES
+            mark = "🔴 " if low else ""
+            lines += [
+                "BEGIN:VEVENT", f"UID:{uid}", f"DTSTAMP:{now}",
+                f"DTSTART;TZID={TZ}:{day}T{a.replace(':', '')}00",
+                f"DTEND;TZID={TZ}:{day}T{b.replace(':', '')}00",
+                f"SUMMARY:{esc(f'{mark}Szabad sávok ({n}) – {pool}')}",
+                f"DESCRIPTION:{esc('Szabad sávok: ' + ', '.join(free))}",
+                f"LOCATION:{esc('Debreceni Sportuszoda')}",
+                f"URL:{URL}", "TRANSP:TRANSPARENT"] + (["COLOR:red"] if low else []) + ["END:VEVENT"]
+            count += 1
+    lines.append("END:VCALENDAR")
+    return "\r\n".join(fold(l) for l in lines) + "\r\n", count
+
+
 def main():
     first = fetch()
     dates = re.findall(r"<option value='(\d{4}-\d\d-\d\d)'", first)
     now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//uszoda-palyabeosztas//HU",
-             "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
-             "X-WR-CALNAME:Debreceni Sportuszoda - szabad sávok", f"X-WR-TIMEZONE:{TZ}"]
-    count = 0
-    for d in dates:
-        html = first if d == dates[0] else fetch({"keres": "igen", "k9": d})
-        for pool, lane_map in parse_day(html).items():
-            if POOLS and pool not in POOLS:
-                continue
-            for a, b, free in segments(lane_map):
-                day = d.replace("-", "")
-                uid = hashlib.md5(f"{d}{pool}{a}{b}{free}".encode()).hexdigest() + "@uszoda"
-                n = f"{len(free)}/{len(lane_map)}"
-                low = len(free) < LOW_LANES
-                mark = "🔴 " if low else ""
-                lines += [
-                    "BEGIN:VEVENT", f"UID:{uid}", f"DTSTAMP:{now}",
-                    f"DTSTART;TZID={TZ}:{day}T{a.replace(':', '')}00",
-                    f"DTEND;TZID={TZ}:{day}T{b.replace(':', '')}00",
-                    f"SUMMARY:{esc(f'{mark}Szabad sávok ({n}) – {pool}')}",
-                    f"DESCRIPTION:{esc('Szabad sávok: ' + ', '.join(free))}",
-                    f"LOCATION:{esc('Debreceni Sportuszoda')}",
-                    f"URL:{URL}", "TRANSP:TRANSPARENT"] + (["COLOR:red"] if low else []) + ["END:VEVENT"]
-                count += 1
-    lines.append("END:VCALENDAR")
-    with open(OUT, "w", encoding="utf-8", newline="") as f:
-        f.write("\r\n".join(fold(l) for l in lines) + "\r\n")
-    print(f"{count} esemény -> {OUT} ({dates[0]} … {dates[-1]})")
+    days = [(d, parse_day(first if d == dates[0] else fetch({"keres": "igen", "k9": d})))
+            for d in dates]
+    for out, (pool, calname) in OUTPUTS.items():
+        text, count = build(days, pool, calname, now)
+        if not count:
+            print(f"{out}: nincs esemény ({pool}), a fájl nem íródott felül", file=sys.stderr)
+            continue
+        with open(out, "w", encoding="utf-8", newline="") as f:
+            f.write(text)
+        print(f"{count} esemény -> {out} ({dates[0]} … {dates[-1]})")
 
 
 if __name__ == "__main__":
