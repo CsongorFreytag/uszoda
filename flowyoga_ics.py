@@ -87,7 +87,6 @@ def main():
             f"DTEND;TZID={TZ}:{day}T{b.replace(':', '')}00",
             f"SUMMARY:{esc(f'{base} - {trainer}')}",
             f"DESCRIPTION:{esc(chr(10).join(desc))}",
-            f"LOCATION:{esc('FLOW Yoga Debrecen')}",
             f"URL:{link}", "END:VEVENT"]
     lines.append("END:VCALENDAR")
     with open(OUT, "w", encoding="utf-8", newline="") as f:
