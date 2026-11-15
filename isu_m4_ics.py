@@ -237,11 +237,27 @@ def vevent(a, now):
             f"URL:{link}", "END:VEVENT"]
 
 
+def day_event(e, now):
+    """Egész napos esemény a verseny napjaira (helyi dátumok, a vég kizáró)."""
+    first = datetime.strptime(e["from_date"][:10], "%Y-%m-%d").date()
+    last = datetime.strptime(e["to_date"][:10], "%Y-%m-%d").date()
+    link = f"https://isu-skating.com/en/figure-skating/events/eventdetail/{e['slug']}"
+    desc = [f"{e['name']}", f"Helyszín: {e['city']}, {e['country_name']}", f"ISU: {link}"]
+    return ["BEGIN:VEVENT", f"UID:{e['event_id']}@isu-m4-days", f"DTSTAMP:{now}",
+            f"DTSTART;VALUE=DATE:{first:%Y%m%d}",
+            f"DTEND;VALUE=DATE:{last + timedelta(days=1):%Y%m%d}",
+            f"SUMMARY:{esc(e['name'] + ' – ' + e['city'].title())}",
+            f"DESCRIPTION:{esc(chr(10).join(desc))}",
+            f"LOCATION:{esc(e['city'].title() + ', ' + e['country_name'])}",
+            f"URL:{link}", "TRANSP:TRANSPARENT", "END:VEVENT"]
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     today = datetime.now(timezone.utc).date()
     lo, hi = today - timedelta(days=M4_PAST), today + timedelta(days=M4_FUTURE)
-    events = [e for e in isu_events()
+    all_events = isu_events()
+    events = [e for e in all_events
               if e["end"].date() + timedelta(days=DAYS_AFTER) >= lo
               and e["start"].date() - timedelta(days=DAYS_BEFORE) <= hi]
     days = set()
@@ -262,6 +278,8 @@ def main():
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//isu-m4-kozvetitesek//HU",
              "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
              "X-WR-CALNAME:ISU műkorcsolya – M4 Sport"]
+    for e in all_events:
+        lines += day_event(e, now)
     for a in sorted(airings, key=lambda a: a["start"]):
         lines += vevent(a, now)
     lines.append("END:VCALENDAR")
