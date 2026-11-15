@@ -238,6 +238,7 @@ def vevent(a, now):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     today = datetime.now(timezone.utc).date()
     lo, hi = today - timedelta(days=M4_PAST), today + timedelta(days=M4_FUTURE)
     events = [e for e in isu_events()

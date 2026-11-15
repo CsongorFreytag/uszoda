@@ -18,15 +18,17 @@ jobs:
           python-version: "3.12"
       - run: python uszoda_ics.py
       - run: python flowyoga_ics.py flowyoga.ics
+      - run: python isu_m4_ics.py isu_m4.ics
+        continue-on-error: true  # ha az ISU/M4 oldal hibázik, a többi feed attól még frissül
       - name: Commit if changed
         run: |
           # a DTSTAMP minden futásnál változik, ezért csak az események változását nézzük
-          if git diff --quiet -I'^DTSTAMP' -- uszoda.ics uszoda_25m.ics flowyoga.ics; then
+          if git diff --quiet -I'^DTSTAMP' -- uszoda.ics uszoda_25m.ics flowyoga.ics isu_m4.ics; then
             echo "nincs változás"
           else
             git config user.name "github-actions"
             git config user.email "actions@github.com"
-            git add uszoda.ics uszoda_25m.ics flowyoga.ics
+            git add uszoda.ics uszoda_25m.ics flowyoga.ics isu_m4.ics
             git commit -m "Update ics files"
             git push
           fi
