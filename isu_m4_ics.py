@@ -223,7 +223,7 @@ def ics_time(dt):
 def vevent(a, now):
     e = a["event"]
     kind = KIND[a["kind"]]
-    summary = f"{kind}: {a['title']} – {a['sub']}" if a["sub"] else f"{kind}: {a['title']}"
+    summary = f"{kind}: {a['sub'] or a['title']}"
     link = a["video"] or (LIVE_URL if a["kind"] == "live" else a["show"])
     desc = [f"Adás: {kind} (M4 Sport)",
             f"ISU esemény: {e['name']} ({e['city']}, {e['country_name']})"]
